@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheatreBoxOffice.Common.DTO.Token;
 using TheatreBoxOffice.Common.DTO.User;
 
@@ -27,6 +28,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("logout")]
+    [Authorize]
     public async Task<ActionResult> Logout([FromBody] string refreshToken)
     {
         throw new NotImplementedException();

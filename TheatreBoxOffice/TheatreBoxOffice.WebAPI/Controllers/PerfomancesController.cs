@@ -7,9 +7,11 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Manager")]
 public class PerfomancesController : ControllerBase
 {
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<ActionResult<PerformanceDto>> Get(long id)
     {
         throw new NotImplementedException();
@@ -48,7 +50,6 @@ public class PerfomancesController : ControllerBase
     }
 
     [HttpPost("{id}/add-tickets")]
-    [AllowAnonymous]
     public async Task<ActionResult<TicketsCreationResult>> AddTicketsToPerformance(long id, [FromBody] TicketsAggregatedCreateDto tickets)
     {
         throw new NotImplementedException();
