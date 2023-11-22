@@ -43,7 +43,7 @@ public class TicketsController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpPost("book")]
+    [HttpPost("reserve")]
     public async Task<ActionResult<UserTicketsDto>> Reserve([FromBody] List<long> ids)
     {
         throw new NotImplementedException();

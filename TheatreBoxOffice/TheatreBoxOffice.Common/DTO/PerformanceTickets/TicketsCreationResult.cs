@@ -2,6 +2,6 @@
 
 public record TicketsCreationResult
 {
-    public List<long> CreatedTicketsIds { get; init; } = default!;
+    public List<TicketsAggregatedDto> CreatedTickets { get; init; } = default!;
     public List<int> FailedTicketsSeats { get; init; } = default!;
 }

@@ -49,8 +49,8 @@ public class PerfomancesController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpPost("{id}/add-tickets")]
-    public async Task<ActionResult<TicketsCreationResult>> AddTicketsToPerformance(long id, [FromBody] TicketsAggregatedCreateDto tickets)
+    [HttpPost("{id}/tickets")]
+    public async Task<ActionResult<TicketsCreationResult>> AddTicketsToPerformance(long id, [FromBody] List<TicketsAggregatedCreateDto> tickets)
     {
         throw new NotImplementedException();
     }
