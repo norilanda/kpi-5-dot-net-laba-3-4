@@ -4,10 +4,14 @@ namespace TheatreBoxOffice.Common.DTO.PerformanceTickets;
 
 public record TicketsAggregatedDto
 {
-    public TicketStatus Status { get; init; }
-    public decimal Price { get; init; }
-    public int TicketsNumber { get; init; }
+    public TicketType TicketType { get; init; } = default!;
     public List<TicketInfo> Tickets { get; init; } = default!;
 }
 
-public record TicketInfo(long Id, int Seat);
+public record TicketType(long TicketTypeId, decimal Price);
+
+public record TicketInfo(
+    int SeatRow, 
+    int SeatNumber,
+    long TicketTypeId, 
+    TicketStatus Status);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheatreBoxOffice.Common.DTO.Ticket;
+using TheatreBoxOffice.Common.DTO.Order;
+using TheatreBoxOffice.Common.DTO.PerformanceTickets;
 
 namespace TheatreBoxOffice.WebAPI.Controllers;
 
@@ -9,42 +10,28 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 [Authorize]
 public class TicketsController : ControllerBase
 {
-    [HttpGet("{id}")]
-    [AllowAnonymous]
-    public async Task<ActionResult<TicketDto>> Get(long id)
+    [HttpPut("{ticketTypeId}")]
+    [Authorize(Roles = "Manager")]
+    public async Task<ActionResult<TicketsAggregatedDto>> UpdateTicketTypeForPerformance(long ticketTypeId, PerformanceTicketsUpdateDto newTicketType)
     {
         throw new NotImplementedException();
     }
 
-    [HttpPut("{id}")]
+    [HttpDelete("{ticketTypeId}")]
     [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketDto>> Put(long id, [FromBody] TicketUpdateDto newTicket)
+    public async Task<ActionResult> DeleteTicketTypeForPerformance(long ticketTypeId)
     {
         throw new NotImplementedException();
     }
 
-    [HttpPost("{id}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketDto>> Post(long id, [FromBody] TicketCreateDto newTicket)
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpDelete("{id}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult> Delete(long id)
-    {
-        throw new NotImplementedException();
-    }
-    
     [HttpPost("buy")]
-    public async Task<ActionResult<UserTicketsDto>> Buy([FromBody] List<long> ids)
+    public async Task<ActionResult<OrderDto>> Buy([FromBody] List<OrderTicketDto> tickets)
     {
         throw new NotImplementedException();
     }
 
     [HttpPost("reserve")]
-    public async Task<ActionResult<UserTicketsDto>> Reserve([FromBody] List<long> ids)
+    public async Task<ActionResult<OrderDto>> Reserve([FromBody] List<OrderTicketDto> tickets)
     {
         throw new NotImplementedException();
     }

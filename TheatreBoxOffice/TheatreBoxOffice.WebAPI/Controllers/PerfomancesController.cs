@@ -42,7 +42,7 @@ public class PerfomancesController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpGet("{id}/tickets-info")]
+    [HttpGet("{id}/tickets")]
     [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<TicketsAggregatedDto>>> GetPerformanceTicketsInfo(long id)
     {
@@ -50,7 +50,8 @@ public class PerfomancesController : ControllerBase
     }
 
     [HttpPost("{id}/tickets")]
-    public async Task<ActionResult<TicketsCreationResult>> AddTicketsToPerformance(long id, [FromBody] List<TicketsAggregatedCreateDto> tickets)
+    [Authorize(Roles = "Manager")]
+    public async Task<ActionResult<TicketsAggregatedDto>> CreateTicketTypeForPerformance([FromBody]PerformanceTicketsCreateDto newTicketType)
     {
         throw new NotImplementedException();
     }
