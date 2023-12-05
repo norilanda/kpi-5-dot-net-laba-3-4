@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TheatreBoxOffice.Common\TheatreBoxOffice.Common.csproj" />
   </ItemGroup>
 
