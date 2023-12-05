@@ -5,7 +5,11 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatreBoxOffice.WebAPI", "TheatreBoxOffice.WebAPI\TheatreBoxOffice.WebAPI.csproj", "{EC52039D-7C89-40F2-98C1-428EA629950E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatreBoxOffice.Common", "TheatreBoxOffice.Common\TheatreBoxOffice.Common.csproj", "{4EF07C82-44BB-4CED-9D11-E12386501139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatreBoxOffice.Common", "TheatreBoxOffice.Common\TheatreBoxOffice.Common.csproj", "{4EF07C82-44BB-4CED-9D11-E12386501139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatreBoxOffice.BLL", "TheatreBoxOffice.BLL\TheatreBoxOffice.BLL.csproj", "{191D68E9-4508-4D42-B099-FC289496DCCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatreBoxOffice.DAL", "TheatreBoxOffice.DAL\TheatreBoxOffice.DAL.csproj", "{7C1AE90F-F8A9-4F00-9794-452717C07B20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{4EF07C82-44BB-4CED-9D11-E12386501139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF07C82-44BB-4CED-9D11-E12386501139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF07C82-44BB-4CED-9D11-E12386501139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191D68E9-4508-4D42-B099-FC289496DCCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191D68E9-4508-4D42-B099-FC289496DCCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191D68E9-4508-4D42-B099-FC289496DCCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191D68E9-4508-4D42-B099-FC289496DCCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1AE90F-F8A9-4F00-9794-452717C07B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1AE90F-F8A9-4F00-9794-452717C07B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1AE90F-F8A9-4F00-9794-452717C07B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1AE90F-F8A9-4F00-9794-452717C07B20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
