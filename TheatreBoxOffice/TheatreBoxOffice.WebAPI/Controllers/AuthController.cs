@@ -33,4 +33,10 @@ public class AuthController : ControllerBase
     {
         throw new NotImplementedException();
     }
+
+    [HttpPost("token/refresh")]
+    public async Task<ActionResult<TokenDto>> Refresh([FromBody] string refreshToken)
+    {
+        throw new NotImplementedException();
+    }
 }
