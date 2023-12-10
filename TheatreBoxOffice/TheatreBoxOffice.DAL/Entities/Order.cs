@@ -6,7 +6,7 @@ namespace TheatreBoxOffice.DAL.Entities;
 
 public class Order : BaseEntity<long>
 {
-    public Guid UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
     public OrderStatus Status { get; set; }
     public DateTime OrderDate { get; set; }
     public decimal Price { get; set; }
