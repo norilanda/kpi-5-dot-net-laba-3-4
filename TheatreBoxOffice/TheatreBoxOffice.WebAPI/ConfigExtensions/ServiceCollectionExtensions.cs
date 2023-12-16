@@ -6,6 +6,8 @@ using TheatreBoxOffice.BLL.Interfaces;
 using TheatreBoxOffice.BLL.Services;
 using TheatreBoxOffice.Common.Options;
 using TheatreBoxOffice.DAL.Context;
+using TheatreBoxOffice.DAL.Interfaces;
+using TheatreBoxOffice.DAL.Repositories;
 
 namespace TheatreBoxOffice.WebAPI.ConfigExtensions;
 
@@ -28,6 +30,8 @@ public static class ServiceCollectionExtensions
 
     public static void AddServices(this IServiceCollection services)
     {
+        services.AddScoped(typeof(IGenericRepository<>), typeof(EfRepository<>));
+
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IPerformanceService, PerformanceService>();
         services.AddScoped<ITokenService, TokenService>();

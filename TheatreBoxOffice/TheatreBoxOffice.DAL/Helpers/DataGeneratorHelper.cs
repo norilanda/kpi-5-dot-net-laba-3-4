@@ -45,6 +45,17 @@ internal static class DataGeneratorHelper
         return faker.Generate(_genreNumber);
     }
 
+    public static IEnumerable<SeatCategory> GenerateSeatCategories()
+    {
+        int count = _startId;
+
+        var faker = new Faker<SeatCategory>()
+            .RuleFor(t => t.Id, _ =>  count++)
+            ;
+
+        return faker.Generate(_seatCategoryNumber);
+    }
+
     public static IEnumerable<Seat> GenerateSeats()
     {
         int count = _startId;
@@ -55,7 +66,7 @@ internal static class DataGeneratorHelper
         {
             var faker = new Faker<Seat>()
                 .RuleFor(t => t.Id, _ =>  count)
-                .RuleFor(t => t.SeatCategory, _ => i)
+                .RuleFor(t => t.SeatCategoryId, _ => i)
                 .RuleFor(t => t.Row, _ => i)
                 .RuleFor(t => t.Number, _ => count++)
                 ;

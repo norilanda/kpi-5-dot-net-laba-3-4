@@ -1,3 +1,4 @@
+using TheatreBoxOffice.BLL.MappingProfiles;
 using TheatreBoxOffice.WebAPI.ConfigExtensions;
 using TheatreBoxOffice.WebAPI.Middlewares;
 
@@ -14,6 +15,9 @@ builder.Services.AddTheatreBoxOfficeDbContext(builder.Configuration);
 builder.Services.AddServices();
 builder.Services.AddJwtTokenAuth(builder.Configuration);
 builder.Services.AddAuthorization();
+builder.Services.AddAuthorization();
+
+builder.Services.AddAutoMapper(typeof(PerformanceProfile));
 
 var app = builder.Build();
 
@@ -29,6 +33,7 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

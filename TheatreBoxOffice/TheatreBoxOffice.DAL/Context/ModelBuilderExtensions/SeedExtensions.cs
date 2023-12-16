@@ -11,6 +11,7 @@ internal static class SeedExtensions
         var authors = DataGeneratorHelper.GenerateAuthors().ToList();
         var genres = DataGeneratorHelper.GenerateGenres().ToList();
         var performances = DataGeneratorHelper.GeneratePerformances();
+        var seatCategory = DataGeneratorHelper.GenerateSeatCategories();
         var seats = DataGeneratorHelper.GenerateSeats();
 
         modelBuilder.Entity<Author>()
@@ -21,6 +22,9 @@ internal static class SeedExtensions
 
         modelBuilder.Entity<Performance>()
             .HasData(performances);
+
+        modelBuilder.Entity<SeatCategory>()
+            .HasData(seatCategory);
 
         modelBuilder.Entity<Seat>()
             .HasData(seats);

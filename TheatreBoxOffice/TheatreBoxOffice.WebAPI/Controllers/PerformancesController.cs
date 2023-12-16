@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheatreBoxOffice.BLL.Interfaces;
+using TheatreBoxOffice.BLL.Specifications.PerformanceSpecs;
 using TheatreBoxOffice.Common.DTO.Performance;
 using TheatreBoxOffice.Common.DTO.PerformanceTickets;
 
@@ -7,39 +9,53 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Manager")]
-public class PerfomancesController : ControllerBase
+//[Authorize(Roles = "Manager")]
+public class PerformancesController : ControllerBase
 {
+    private readonly IPerformanceService _performanceService;
+
+    public PerformancesController(IPerformanceService performanceService)
+    {
+        _performanceService = performanceService;
+    }
+
     [HttpGet("{id}")]
     [AllowAnonymous]
-    public async Task<ActionResult<PerformanceDto>> Get(long id)
+    public async Task<ActionResult<PerformanceDto>> GetById(long id)
     {
-        throw new NotImplementedException();
+        var entity = await _performanceService.GetByIdAsync(id);
+        return Ok(entity);
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult<PerformanceDto>> Put(long id, [FromBody] PerformanceUpdateDto newPerformance)
     {
-        throw new NotImplementedException();
+        newPerformance.Id = id;
+        var entity = await _performanceService.UpdateAsync(newPerformance);
+        return Ok(entity);
     }
 
     [HttpPost]
     public async Task<ActionResult<PerformanceDto>> Create([FromBody] PerformanceCreateDto newPerformance)
     {
-        throw new NotImplementedException();
+        var entity = await _performanceService.CreateAsync(newPerformance);
+
+        return CreatedAtAction(nameof(GetById), new { id = entity.Id }, entity);
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(long id)
     {
-        throw new NotImplementedException();
+        await _performanceService.DeleteAsync(id);
+        return Ok();
     }
 
     [HttpGet("search")]
     [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<PerformanceDto>>> GetFilteredPerformances([FromQuery] PerformanceFilterDto filter)
     {
-        throw new NotImplementedException();
+        var entities = await _performanceService.GetFilteredPerformancesAsync(filter);
+        return Ok(entities);
     }
 
     [HttpGet("{id}/tickets")]

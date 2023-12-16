@@ -250,21 +250,6 @@ namespace TheatreBoxOffice.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SeatTicketPriceType", b =>
-                {
-                    b.Property<long>("SeatsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TicketPriceTypesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("SeatsId", "TicketPriceTypesId");
-
-                    b.HasIndex("TicketPriceTypesId");
-
-                    b.ToTable("SeatTicketPriceType");
-                });
-
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.Author", b =>
                 {
                     b.Property<long>("Id")
@@ -291,20 +276,20 @@ namespace TheatreBoxOffice.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            FirstName = "Arvilla",
-                            LastName = "Lesch"
+                            FirstName = "Jerrold",
+                            LastName = "Moore"
                         },
                         new
                         {
                             Id = 2L,
-                            FirstName = "Fabiola",
-                            LastName = "Connelly"
+                            FirstName = "Rogelio",
+                            LastName = "Skiles"
                         },
                         new
                         {
                             Id = 3L,
-                            FirstName = "Helga",
-                            LastName = "Collier"
+                            FirstName = "Donnell",
+                            LastName = "Olson"
                         });
                 });
 
@@ -329,27 +314,27 @@ namespace TheatreBoxOffice.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Hip Hop"
+                            Name = "Reggae"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Stage And Screen"
+                            Name = "Latin"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "World"
+                            Name = "Rap"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Classical"
+                            Name = "Pop"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Rap"
+                            Name = "Latin"
                         });
                 });
 
@@ -363,9 +348,6 @@ namespace TheatreBoxOffice.DAL.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(8,2)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -425,32 +407,32 @@ namespace TheatreBoxOffice.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            Date = new DateTime(2024, 9, 3, 14, 34, 44, 168, DateTimeKind.Local).AddTicks(8131),
-                            Name = "Dynamic Implementation Supervisor"
+                            Date = new DateTime(2024, 4, 8, 0, 45, 29, 452, DateTimeKind.Local).AddTicks(8602),
+                            Name = "Product Usability Strategist"
                         },
                         new
                         {
                             Id = 2L,
-                            Date = new DateTime(2024, 5, 27, 23, 0, 49, 448, DateTimeKind.Local).AddTicks(2553),
-                            Name = "Dynamic Integration Planner"
+                            Date = new DateTime(2024, 8, 18, 19, 24, 29, 295, DateTimeKind.Local).AddTicks(2167),
+                            Name = "Regional Directives Consultant"
                         },
                         new
                         {
                             Id = 3L,
-                            Date = new DateTime(2024, 4, 19, 23, 21, 16, 296, DateTimeKind.Local).AddTicks(6836),
-                            Name = "Corporate Infrastructure Strategist"
+                            Date = new DateTime(2024, 8, 24, 2, 53, 12, 462, DateTimeKind.Local).AddTicks(9765),
+                            Name = "Internal Usability Liaison"
                         },
                         new
                         {
                             Id = 4L,
-                            Date = new DateTime(2024, 3, 4, 20, 50, 9, 951, DateTimeKind.Local).AddTicks(4061),
-                            Name = "Lead Communications Associate"
+                            Date = new DateTime(2024, 9, 7, 13, 24, 38, 633, DateTimeKind.Local).AddTicks(9115),
+                            Name = "International Optimization Coordinator"
                         },
                         new
                         {
                             Id = 5L,
-                            Date = new DateTime(2024, 9, 2, 20, 7, 1, 781, DateTimeKind.Local).AddTicks(4840),
-                            Name = "Legacy Implementation Administrator"
+                            Date = new DateTime(2024, 7, 9, 23, 53, 33, 793, DateTimeKind.Local).AddTicks(363),
+                            Name = "Corporate Creative Administrator"
                         });
                 });
 
@@ -468,10 +450,12 @@ namespace TheatreBoxOffice.DAL.Migrations
                     b.Property<int>("Row")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatCategory")
+                    b.Property<int>("SeatCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SeatCategoryId");
 
                     b.ToTable("Seats");
 
@@ -481,140 +465,171 @@ namespace TheatreBoxOffice.DAL.Migrations
                             Id = 1L,
                             Number = 1,
                             Row = 1,
-                            SeatCategory = 1
+                            SeatCategoryId = 1
                         },
                         new
                         {
                             Id = 2L,
                             Number = 2,
                             Row = 1,
-                            SeatCategory = 1
+                            SeatCategoryId = 1
                         },
                         new
                         {
                             Id = 3L,
                             Number = 3,
                             Row = 1,
-                            SeatCategory = 1
+                            SeatCategoryId = 1
                         },
                         new
                         {
                             Id = 4L,
                             Number = 4,
                             Row = 1,
-                            SeatCategory = 1
+                            SeatCategoryId = 1
                         },
                         new
                         {
                             Id = 5L,
                             Number = 5,
                             Row = 1,
-                            SeatCategory = 1
+                            SeatCategoryId = 1
                         },
                         new
                         {
                             Id = 6L,
                             Number = 6,
                             Row = 2,
-                            SeatCategory = 2
+                            SeatCategoryId = 2
                         },
                         new
                         {
                             Id = 7L,
                             Number = 7,
                             Row = 2,
-                            SeatCategory = 2
+                            SeatCategoryId = 2
                         },
                         new
                         {
                             Id = 8L,
                             Number = 8,
                             Row = 2,
-                            SeatCategory = 2
+                            SeatCategoryId = 2
                         },
                         new
                         {
                             Id = 9L,
                             Number = 9,
                             Row = 2,
-                            SeatCategory = 2
+                            SeatCategoryId = 2
                         },
                         new
                         {
                             Id = 10L,
                             Number = 10,
                             Row = 2,
-                            SeatCategory = 2
+                            SeatCategoryId = 2
                         },
                         new
                         {
                             Id = 11L,
                             Number = 11,
                             Row = 3,
-                            SeatCategory = 3
+                            SeatCategoryId = 3
                         },
                         new
                         {
                             Id = 12L,
                             Number = 12,
                             Row = 3,
-                            SeatCategory = 3
+                            SeatCategoryId = 3
                         },
                         new
                         {
                             Id = 13L,
                             Number = 13,
                             Row = 3,
-                            SeatCategory = 3
+                            SeatCategoryId = 3
                         },
                         new
                         {
                             Id = 14L,
                             Number = 14,
                             Row = 3,
-                            SeatCategory = 3
+                            SeatCategoryId = 3
                         },
                         new
                         {
                             Id = 15L,
                             Number = 15,
                             Row = 3,
-                            SeatCategory = 3
+                            SeatCategoryId = 3
                         },
                         new
                         {
                             Id = 16L,
                             Number = 16,
                             Row = 4,
-                            SeatCategory = 4
+                            SeatCategoryId = 4
                         },
                         new
                         {
                             Id = 17L,
                             Number = 17,
                             Row = 4,
-                            SeatCategory = 4
+                            SeatCategoryId = 4
                         },
                         new
                         {
                             Id = 18L,
                             Number = 18,
                             Row = 4,
-                            SeatCategory = 4
+                            SeatCategoryId = 4
                         },
                         new
                         {
                             Id = 19L,
                             Number = 19,
                             Row = 4,
-                            SeatCategory = 4
+                            SeatCategoryId = 4
                         },
                         new
                         {
                             Id = 20L,
                             Number = 20,
                             Row = 4,
-                            SeatCategory = 4
+                            SeatCategoryId = 4
+                        });
+                });
+
+            modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.SeatCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SeatCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        },
+                        new
+                        {
+                            Id = 2
+                        },
+                        new
+                        {
+                            Id = 3
+                        },
+                        new
+                        {
+                            Id = 4
                         });
                 });
 
@@ -632,12 +647,14 @@ namespace TheatreBoxOffice.DAL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(7,2)");
 
-                    b.Property<int>("SeatCategory")
+                    b.Property<int>("SeatCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PerformanceId");
+
+                    b.HasIndex("SeatCategoryId");
 
                     b.ToTable("TicketPriceType");
                 });
@@ -723,21 +740,6 @@ namespace TheatreBoxOffice.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SeatTicketPriceType", b =>
-                {
-                    b.HasOne("TheatreBoxOffice.DAL.Entities.Seat", null)
-                        .WithMany()
-                        .HasForeignKey("SeatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheatreBoxOffice.DAL.Entities.TicketPriceType", null)
-                        .WithMany()
-                        .HasForeignKey("TicketPriceTypesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.Order", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
@@ -754,19 +756,19 @@ namespace TheatreBoxOffice.DAL.Migrations
                     b.HasOne("TheatreBoxOffice.DAL.Entities.Order", "Order")
                         .WithMany("OrderTickets")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TheatreBoxOffice.DAL.Entities.Seat", "Seat")
                         .WithMany("OrderTickets")
                         .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TheatreBoxOffice.DAL.Entities.TicketPriceType", "TicketPriceType")
                         .WithMany("OrderTickets")
                         .HasForeignKey("TicketPriceTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -774,6 +776,17 @@ namespace TheatreBoxOffice.DAL.Migrations
                     b.Navigation("Seat");
 
                     b.Navigation("TicketPriceType");
+                });
+
+            modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.Seat", b =>
+                {
+                    b.HasOne("TheatreBoxOffice.DAL.Entities.SeatCategory", "SeatCategory")
+                        .WithMany("Seats")
+                        .HasForeignKey("SeatCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SeatCategory");
                 });
 
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.TicketPriceType", b =>
@@ -784,7 +797,15 @@ namespace TheatreBoxOffice.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TheatreBoxOffice.DAL.Entities.SeatCategory", "SeatCategory")
+                        .WithMany("TicketPriceTypes")
+                        .HasForeignKey("SeatCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Performance");
+
+                    b.Navigation("SeatCategory");
                 });
 
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.Order", b =>
@@ -800,6 +821,13 @@ namespace TheatreBoxOffice.DAL.Migrations
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.Seat", b =>
                 {
                     b.Navigation("OrderTickets");
+                });
+
+            modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.SeatCategory", b =>
+                {
+                    b.Navigation("Seats");
+
+                    b.Navigation("TicketPriceTypes");
                 });
 
             modelBuilder.Entity("TheatreBoxOffice.DAL.Entities.TicketPriceType", b =>

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TheatreBoxOffice.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,18 +94,15 @@ namespace TheatreBoxOffice.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Seats",
+                name: "SeatCategory",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SeatCategory = table.Column<int>(type: "int", nullable: false),
-                    Row = table.Column<int>(type: "int", nullable: false),
-                    Number = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seats", x => x.Id);
+                    table.PrimaryKey("PK_SeatCategory", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,8 +219,7 @@ namespace TheatreBoxOffice.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false)
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -283,6 +281,27 @@ namespace TheatreBoxOffice.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Seats",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SeatCategoryId = table.Column<int>(type: "int", nullable: false),
+                    Row = table.Column<int>(type: "int", nullable: false),
+                    Number = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Seats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Seats_SeatCategory_SeatCategoryId",
+                        column: x => x.SeatCategoryId,
+                        principalTable: "SeatCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TicketPriceType",
                 columns: table => new
                 {
@@ -290,7 +309,7 @@ namespace TheatreBoxOffice.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PerformanceId = table.Column<long>(type: "bigint", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
-                    SeatCategory = table.Column<int>(type: "int", nullable: false)
+                    SeatCategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -299,6 +318,12 @@ namespace TheatreBoxOffice.DAL.Migrations
                         name: "FK_TicketPriceType_Performances_PerformanceId",
                         column: x => x.PerformanceId,
                         principalTable: "Performances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TicketPriceType_SeatCategory_SeatCategoryId",
+                        column: x => x.SeatCategoryId,
+                        principalTable: "SeatCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -319,43 +344,91 @@ namespace TheatreBoxOffice.DAL.Migrations
                         column: x => x.OrderId,
                         principalTable: "Order",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OrderTickets_Seats_SeatId",
                         column: x => x.SeatId,
                         principalTable: "Seats",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OrderTickets_TicketPriceType_TicketPriceTypeId",
                         column: x => x.TicketPriceTypeId,
                         principalTable: "TicketPriceType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "SeatTicketPriceType",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "Authors",
+                columns: new[] { "Id", "FirstName", "LastName" },
+                values: new object[,]
                 {
-                    SeatsId = table.Column<long>(type: "bigint", nullable: false),
-                    TicketPriceTypesId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
+                    { 1L, "Jerrold", "Moore" },
+                    { 2L, "Rogelio", "Skiles" },
+                    { 3L, "Donnell", "Olson" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Genres",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
                 {
-                    table.PrimaryKey("PK_SeatTicketPriceType", x => new { x.SeatsId, x.TicketPriceTypesId });
-                    table.ForeignKey(
-                        name: "FK_SeatTicketPriceType_Seats_SeatsId",
-                        column: x => x.SeatsId,
-                        principalTable: "Seats",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SeatTicketPriceType_TicketPriceType_TicketPriceTypesId",
-                        column: x => x.TicketPriceTypesId,
-                        principalTable: "TicketPriceType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    { 1, "Reggae" },
+                    { 2, "Latin" },
+                    { 3, "Rap" },
+                    { 4, "Pop" },
+                    { 5, "Latin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Performances",
+                columns: new[] { "Id", "Date", "Name" },
+                values: new object[,]
+                {
+                    { 1L, new DateTime(2024, 4, 8, 0, 45, 29, 452, DateTimeKind.Local).AddTicks(8602), "Product Usability Strategist" },
+                    { 2L, new DateTime(2024, 8, 18, 19, 24, 29, 295, DateTimeKind.Local).AddTicks(2167), "Regional Directives Consultant" },
+                    { 3L, new DateTime(2024, 8, 24, 2, 53, 12, 462, DateTimeKind.Local).AddTicks(9765), "Internal Usability Liaison" },
+                    { 4L, new DateTime(2024, 9, 7, 13, 24, 38, 633, DateTimeKind.Local).AddTicks(9115), "International Optimization Coordinator" },
+                    { 5L, new DateTime(2024, 7, 9, 23, 53, 33, 793, DateTimeKind.Local).AddTicks(363), "Corporate Creative Administrator" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SeatCategory",
+                column: "Id",
+                values: new object[]
+                {
+                    1,
+                    2,
+                    3,
+                    4
+                });
+
+            migrationBuilder.InsertData(
+                table: "Seats",
+                columns: new[] { "Id", "Number", "Row", "SeatCategoryId" },
+                values: new object[,]
+                {
+                    { 1L, 1, 1, 1 },
+                    { 2L, 2, 1, 1 },
+                    { 3L, 3, 1, 1 },
+                    { 4L, 4, 1, 1 },
+                    { 5L, 5, 1, 1 },
+                    { 6L, 6, 2, 2 },
+                    { 7L, 7, 2, 2 },
+                    { 8L, 8, 2, 2 },
+                    { 9L, 9, 2, 2 },
+                    { 10L, 10, 2, 2 },
+                    { 11L, 11, 3, 3 },
+                    { 12L, 12, 3, 3 },
+                    { 13L, 13, 3, 3 },
+                    { 14L, 14, 3, 3 },
+                    { 15L, 15, 3, 3 },
+                    { 16L, 16, 4, 4 },
+                    { 17L, 17, 4, 4 },
+                    { 18L, 18, 4, 4 },
+                    { 19L, 19, 4, 4 },
+                    { 20L, 20, 4, 4 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -423,14 +496,19 @@ namespace TheatreBoxOffice.DAL.Migrations
                 column: "TicketPriceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeatTicketPriceType_TicketPriceTypesId",
-                table: "SeatTicketPriceType",
-                column: "TicketPriceTypesId");
+                name: "IX_Seats_SeatCategoryId",
+                table: "Seats",
+                column: "SeatCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TicketPriceType_PerformanceId",
                 table: "TicketPriceType",
                 column: "PerformanceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketPriceType_SeatCategoryId",
+                table: "TicketPriceType",
+                column: "SeatCategoryId");
         }
 
         /// <inheritdoc />
@@ -461,9 +539,6 @@ namespace TheatreBoxOffice.DAL.Migrations
                 name: "OrderTickets");
 
             migrationBuilder.DropTable(
-                name: "SeatTicketPriceType");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -486,6 +561,9 @@ namespace TheatreBoxOffice.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Performances");
+
+            migrationBuilder.DropTable(
+                name: "SeatCategory");
         }
     }
 }
