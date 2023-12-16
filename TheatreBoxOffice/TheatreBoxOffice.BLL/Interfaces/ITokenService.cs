@@ -2,6 +2,6 @@
 
 public interface ITokenService
 {
-    public string GenerateAccessToken();
+    public string GenerateAccessToken(string userId, IList<string> roles);
     public string GenerateRefreshToken();
 }

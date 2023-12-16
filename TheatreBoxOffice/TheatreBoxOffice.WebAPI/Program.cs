@@ -1,4 +1,5 @@
 using TheatreBoxOffice.WebAPI.ConfigExtensions;
+using TheatreBoxOffice.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTheatreBoxOfficeDbContext(builder.Configuration);
 builder.Services.AddServices();
+builder.Services.AddJwtTokenAuth(builder.Configuration);
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -22,6 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.InitializeDatabase();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

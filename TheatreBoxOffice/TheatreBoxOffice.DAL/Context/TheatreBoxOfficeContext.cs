@@ -14,7 +14,7 @@ public class TheatreBoxOfficeContext : IdentityDbContext<IdentityUser>
     public DbSet<OrderTicket> OrderTickets { get; set; }
     public DbSet<Performance> Performances { get; set; }
     public DbSet<Seat> Seats { get; set; }
-    public DbSet<Order> ticketPriceTypes { get; set; }
+    public DbSet<Order> TicketPriceTypes { get; set; }
 
     public TheatreBoxOfficeContext(DbContextOptions<TheatreBoxOfficeContext> options) : base(options)
     { }
