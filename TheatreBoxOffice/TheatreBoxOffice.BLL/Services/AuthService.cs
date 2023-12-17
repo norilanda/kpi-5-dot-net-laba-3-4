@@ -98,14 +98,4 @@ public class AuthService : IAuthService
 
         return user;
     }
-
-    //public Task LogoutAsync(string refreshTokenDto)
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //public Task<TokenDto> RefreshAsync(string refreshTokenDto)
-    //{
-    //    throw new NotImplementedException();
-    //}
 }

@@ -51,20 +51,6 @@ public class PerformanceService : IPerformanceService
             ?? throw ResponseException.NotFound();
 
         var performance = _mapper.Map( newPerformanceDto, entity ); // TODO: add updating collections
-        
-
-        //var newAuthors = _mapper.Map<List<Author>>(newPerformanceDto.Authors);
-        //var newGenres = _mapper.Map<List<Genre>>(newPerformanceDto.Genres);
-
-        //var authors = performance.Genres.IntersectBy(newGenres.Select(g => g.Name), g => g.Name);
-        
-        //
-
-        //var authors = await GetOrCreateAuthors(newPerformanceDto.Authors);
-        //var genres = await GetOrCreateGenres(newPerformanceDto.Genres);
-
-        //performance.Authors = authors;
-        //performance.Genres = genres;
 
         await _performanceRepository.UpdateAsync( performance );
         await _performanceRepository.SaveChangesAsync();

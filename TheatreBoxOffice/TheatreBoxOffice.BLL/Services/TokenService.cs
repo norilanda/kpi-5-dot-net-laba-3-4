@@ -41,9 +41,4 @@ public class TokenService : ITokenService
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
         return encodedJwt;
     }
-
-    public string GenerateRefreshToken()
-    {
-        throw new NotImplementedException();
-    }
 }

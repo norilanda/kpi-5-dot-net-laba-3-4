@@ -9,7 +9,7 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize(Roles = "Manager")]
+[Authorize(Roles = "Manager")]
 public class PerformancesController : ControllerBase
 {
     private readonly IPerformanceService _performanceService;
@@ -69,7 +69,6 @@ public class PerformancesController : ControllerBase
     }
 
     [HttpPost("{id}/tickets")]
-    //[Authorize(Roles = "Manager")]
     public async Task<ActionResult<TicketsAggregatedDto>> CreateTicketTypeForPerformance(long id, [FromBody]PerformanceTicketsCreateDto newTicketType)
     {
         var entity = await _ticketService.AddTicketTypeAsync(id, newTicketType);

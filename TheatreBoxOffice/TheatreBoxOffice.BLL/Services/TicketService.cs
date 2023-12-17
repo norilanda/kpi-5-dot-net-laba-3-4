@@ -104,16 +104,6 @@ public class TicketService : ITicketService
         return orderDto!;
     }
 
-    public Task<TicketsAggregatedDto> UpdateTicketTypeAsync(long performanceId, PerformanceTicketsUpdateDto newTicketType)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteTicketTypeAsync(long ticketTypeId)
-    {
-        throw new NotImplementedException();
-    }
-
     private async Task<List<OrderTicket>> CreateOrderTicketsAsync(List<OrderTicketDto> tickets)
     {
         List<OrderTicket> orderTickets = new();

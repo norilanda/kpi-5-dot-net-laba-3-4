@@ -37,17 +37,4 @@ public class AuthController : ControllerBase
         var token = await _authService.RegisterManagerAsync(user);
         return Ok(token);
     }
-
-    //[HttpPost("logout")]
-    //[Authorize]
-    //public async Task<ActionResult> Logout([FromBody] string refreshToken)
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //[HttpPost("token/refresh")]
-    //public async Task<ActionResult<TokenDto>> Refresh([FromBody] string refreshToken)
-    //{
-    //    throw new NotImplementedException();
-    //}
 }

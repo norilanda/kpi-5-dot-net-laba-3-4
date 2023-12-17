@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using TheatreBoxOffice.BLL.Interfaces;
 using TheatreBoxOffice.Common.DTO.Order;
-using TheatreBoxOffice.Common.DTO.PerformanceTickets;
 
 namespace TheatreBoxOffice.WebAPI.Controllers;
 
@@ -17,20 +15,6 @@ public class TicketsController : ControllerBase
     public TicketsController(ITicketService ticketService)
     {
         _ticketService = ticketService;
-    }
-
-    [HttpPut("{ticketTypeId}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketsAggregatedDto>> UpdateTicketTypeForPerformance(long ticketTypeId, PerformanceTicketsUpdateDto newTicketType)
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpDelete("{ticketTypeId}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult> DeleteTicketTypeForPerformance(long ticketTypeId)
-    {
-        throw new NotImplementedException();
     }
 
     [HttpPost("buy")]
