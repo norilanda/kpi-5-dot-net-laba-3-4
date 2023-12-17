@@ -13,10 +13,12 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 public class PerformancesController : ControllerBase
 {
     private readonly IPerformanceService _performanceService;
+    private readonly ITicketService _ticketService;
 
-    public PerformancesController(IPerformanceService performanceService)
+    public PerformancesController(IPerformanceService performanceService, ITicketService ticketService)
     {
         _performanceService = performanceService;
+        _ticketService = ticketService;
     }
 
     [HttpGet("{id}")]
@@ -62,13 +64,15 @@ public class PerformancesController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<TicketsAggregatedDto>>> GetPerformanceTicketsInfo(long id)
     {
-        throw new NotImplementedException();
+        var entities = await _ticketService.GetTicketsInfoForPerformanceAsync(id);
+        return Ok(entities);
     }
 
     [HttpPost("{id}/tickets")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketsAggregatedDto>> CreateTicketTypeForPerformance([FromBody]PerformanceTicketsCreateDto newTicketType)
+    //[Authorize(Roles = "Manager")]
+    public async Task<ActionResult<TicketsAggregatedDto>> CreateTicketTypeForPerformance(long id, [FromBody]PerformanceTicketsCreateDto newTicketType)
     {
-        throw new NotImplementedException();
+        var entity = await _ticketService.AddTicketTypeAsync(id, newTicketType);
+        return Ok(entity);
     }
 }

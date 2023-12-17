@@ -1,5 +1,5 @@
 ﻿namespace TheatreBoxOffice.Common.DTO.PerformanceTickets;
 
 public record PerformanceTicketsUpdateDto (
-    long SeatCategory,
+    int SeatCategoryId,
     decimal Price);
