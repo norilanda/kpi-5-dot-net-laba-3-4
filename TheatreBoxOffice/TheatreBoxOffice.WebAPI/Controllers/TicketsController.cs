@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheatreBoxOffice.Common.DTO.Ticket;
+using TheatreBoxOffice.BLL.Interfaces;
+using TheatreBoxOffice.Common.DTO.Order;
 
 namespace TheatreBoxOffice.WebAPI.Controllers;
 
@@ -9,43 +10,37 @@ namespace TheatreBoxOffice.WebAPI.Controllers;
 [Authorize]
 public class TicketsController : ControllerBase
 {
-    [HttpGet("{id}")]
-    [AllowAnonymous]
-    public async Task<ActionResult<TicketDto>> Get(long id)
+    private readonly ITicketService _ticketService;
+
+    public TicketsController(ITicketService ticketService)
     {
-        throw new NotImplementedException();
+        _ticketService = ticketService;
     }
 
-    [HttpPut("{id}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketDto>> Put(long id, [FromBody] TicketUpdateDto newTicket)
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpPost("{id}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult<TicketDto>> Post(long id, [FromBody] TicketCreateDto newTicket)
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpDelete("{id}")]
-    [Authorize(Roles = "Manager")]
-    public async Task<ActionResult> Delete(long id)
-    {
-        throw new NotImplementedException();
-    }
-    
     [HttpPost("buy")]
-    public async Task<ActionResult<UserTicketsDto>> Buy([FromBody] List<long> ids)
+    public async Task<ActionResult<OrderDto>> Buy([FromBody] List<OrderTicketDto> tickets)
     {
-        throw new NotImplementedException();
+        var userId = GetCurrentUserId();
+        if (userId == null)
+            return Unauthorized();
+
+        var entities = await _ticketService.BuyTicketsAsync(userId, tickets);
+        return Ok(entities);
     }
 
     [HttpPost("reserve")]
-    public async Task<ActionResult<UserTicketsDto>> Reserve([FromBody] List<long> ids)
+    public async Task<ActionResult<OrderDto>> Reserve([FromBody] List<OrderTicketDto> tickets)
     {
-        throw new NotImplementedException();
+        var userId = GetCurrentUserId();
+        if (userId == null)
+            return Unauthorized();
+
+        var entities = await _ticketService.ReserveTicketsAsync(userId, tickets);
+        return Ok(entities);
+    }
+
+    private string? GetCurrentUserId()
+    {
+        return User.FindFirst("id")?.Value;
     }
 }
