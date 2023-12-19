@@ -4,12 +4,11 @@ using TheatreBoxOffice.Common.Enums;
 
 namespace TheatreBoxOffice.Common.DTO.Order;
 
-public record OrderDto
+public class OrderDto
 {
-    public long OrderId { get; init; }
-    public DateTime OrderDate { get; init; }
-    public OrderStatus Status { get; init; }
-    public decimal Price { get; init; }
-    public List<TicketDto> Tickets { get; init; } = default!;
-    public UserDto User { get; init; } = default!;
+    public long OrderId { get; set; }
+    public DateTime OrderDate { get; set; }
+    public OrderStatus Status { get; set; }
+    public List<TicketDto> Tickets { get; set; } = default!;
+    public UserDto User { get; set; } = default!;
 }

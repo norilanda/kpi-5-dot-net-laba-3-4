@@ -6,5 +6,5 @@ public record PerformanceFilterDto
     public string? AuthorFirstName { get; init; }
     public string? AuthorLastName { get; init; }
     public string? Genre { get; init; }
-    public DateOnly? Date { get; init; }
+    public DateTime? Date { get; init; }
 }

@@ -2,6 +2,5 @@
 
 public record TokenDto
 {
-    public string AccessToket { get; init; } = string.Empty;
-    public string RefreshToket { get; init; } = string.Empty;
+    public string AccessToken { get; init; } = string.Empty;
 }

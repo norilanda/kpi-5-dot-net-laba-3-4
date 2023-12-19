@@ -2,6 +2,6 @@
 
 public record UserDto
 {
-    public long Id { get; init; }
+    public string Id { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
 }
