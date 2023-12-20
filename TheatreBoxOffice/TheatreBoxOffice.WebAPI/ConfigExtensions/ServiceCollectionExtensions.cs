@@ -23,7 +23,8 @@ public static class ServiceCollectionExtensions
                 opt => opt.MigrationsAssembly(typeof(TheatreBoxOfficeContext).Assembly.GetName().Name))
             );
 
-        services.AddIdentity<IdentityUser, IdentityRole>()
+        services
+            .AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<TheatreBoxOfficeContext>()
             .AddDefaultTokenProviders();
     }
@@ -70,6 +71,7 @@ public static class ServiceCollectionExtensions
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         })
         .AddJwtBearer(options =>
         {
